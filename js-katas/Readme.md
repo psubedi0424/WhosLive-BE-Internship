@@ -7,8 +7,8 @@
     -values and references
     -this keyword
 
-![Simple Closure Program](../images/Screenshot 2025-11-07 at 09.44.18.png)
-![Simple This Program](../images/Screenshot 2025-11-07 at 14.08.53.png)
+![Simple Closure Program](./images/Closure-example.png)
+![Simple This Program](./images/this-example.png)
 
 
 
