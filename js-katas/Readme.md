@@ -24,6 +24,7 @@
     - Jest should be installed and setup.
 
     =>Package.json should include jest in test.
-       ```bash
+    
+```bash
     npm test 
    ```
