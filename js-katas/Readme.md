@@ -6,7 +6,7 @@
     -modules(import,exports)
     -values and references
     -this keyword
-
+## Images
 ![Simple Closure Program](./images/Closure-example.png)
 ![Simple This Program](./images/this-example.png)
 
