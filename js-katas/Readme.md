@@ -16,3 +16,6 @@
     -tested 15 functions using jest  and all tests are green.
     -learned about the basic concepts and mainly import and export modules.
     -used some default or inbuilt functions and operators.
+
+##Image
+![Test Image](./images/test-jest.png)
