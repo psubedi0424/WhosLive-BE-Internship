@@ -18,4 +18,4 @@
     -used some default or inbuilt functions and operators.
 
 ##Image
-![Test Image](./images/test-jest.png)
+![Test Image](./images/jest-test.png)
