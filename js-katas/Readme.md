@@ -19,3 +19,11 @@
 
 ##Image
 ![Test Image](./images/jest-test.png)
+
+## To Run the tests:
+    - Jest should be installed and setup.
+
+    =>Package.json should include jest in test.
+       ```bash
+    npm test 
+   ```
