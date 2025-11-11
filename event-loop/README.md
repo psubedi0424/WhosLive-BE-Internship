@@ -20,7 +20,9 @@ This concept is essential for understanding how Node.js handles **I/O operations
  | Concept | Explanation |
 |----------|--------------|
 | **Call Stack** | Where JS executes code line-by-line |
-| **Callback Queue (Macrotask)** | Stores tasks like `setTimeout`, `setImmediate`, and I/O callbacks |
+| **Callback Queue (Macrotask)** |  `setTimeout`, `setImmediate`, and I/O callbacks |
 | **Microtask Queue** | Stores Promises and `process.nextTick()` — runs before macrotasks |
 
 ---
+## Execution order
+Synchronous → process.nextTick → Promises → Timers (setTimeout)
