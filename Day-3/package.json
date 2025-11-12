@@ -1,0 +1,20 @@
+{
+  "name": "day-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node ./bin/json2csv.js",
+    "start": "node ./bin/json2csv.js",
+    "test": "jest --runInBand",
+    "build": "echo 'No build step yet (pure Node).'",
+    "gen-fixture": "node ./tools/generate_ndjson.js 300000 ./fixtures/large.ndjson"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
