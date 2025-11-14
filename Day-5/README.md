@@ -1,5 +1,5 @@
 # Day 5 — HTTP Basics & Testing (NestJS + Supertest)
-    -Learn HTTP fundamentals and write automated integration (E2E) tests using Jest + Supertest.
+-Learn HTTP fundamentals and write automated integration (E2E) tests using Jest + Supertest.
 
 ---
 ## What I did Today.
