@@ -3,22 +3,23 @@
 
 ---
 ## What I did Today.
-    1.Created a small NESTJS project.
-        This project contains three basic HTTP routes meant to teach:
-        Status codes
-        Exception handling
-        Testing with Supertest
-    2. Implemented 3 routes:
-        -/ok
-        -/fail
-        -/missing
-    
-    3. Ran the test
+
+1.Created a small NESTJS project.
+This project contains three basic HTTP routes meant to teach:
+Status codes
+Exception handling
+Testing with Supertest
+2. Implemented 3 routes:
+-/ok
+-/fail
+-/missing
+
+3. Ran the test
 ```bash
     npm run test:e2e
 ```
-    4. Prepared the coverge report
-        -For coverage report
+4. Prepared the coverge report
+    -For coverage report
 ```bash
     npm run test:e2e -- --coverage
     OR
