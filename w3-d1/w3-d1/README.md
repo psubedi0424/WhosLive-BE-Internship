@@ -12,4 +12,8 @@ npm run start:dev
 ```
 ---
 # Images:
-![Swagger UI]()
+-Swagger Image
+![Swagger UI](https://github.com/psubedi0424/WhosLive-BE-Internship/blob/main/w3-d1/w3-d1/images/Screenshot%202025-11-24%20at%2018.51.57.png)
+_Postman Images
+![Postman version](https://github.com/psubedi0424/WhosLive-BE-Internship/blob/main/w3-d1/w3-d1/images/Screenshot%202025-11-24%20at%2018.52.13.png)
+![Postman health](https://github.com/psubedi0424/WhosLive-BE-Internship/blob/main/w3-d1/w3-d1/images/Screenshot%202025-11-24%20at%2018.52.27.png)
