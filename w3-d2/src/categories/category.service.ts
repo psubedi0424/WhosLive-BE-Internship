@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Category } from '../entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateCategoryDto } from './categrory.dto';
+import { CreateCategoryDto } from './category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -51,6 +51,7 @@ export class CategoryService {
     const result = await this.repo.delete(id);
     if (result.affected === 0) {
             throw new NotFoundException(`Category with ID ${id} not found`);
-        }
+    }
+    return { message: 'Category deleted successfully'};
     }
 }

@@ -20,6 +20,9 @@ export class Category {
   slug: string;
 
   @Column()
+  name: string;
+
+  @Column()
   title: string;
 
   @ManyToMany(() => Video, (v) => v.categories)

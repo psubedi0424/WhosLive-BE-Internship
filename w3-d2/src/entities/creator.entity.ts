@@ -22,6 +22,9 @@ export class Creator {
   @Column()
   name: string;
 
+  @Column()
+  email: string;
+
   @Column({ nullable: true })
   platform: string;
 

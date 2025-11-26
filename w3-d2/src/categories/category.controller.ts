@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './categrory.dto';
+import { CreateCategoryDto } from './category.dto';
 
 @Controller('categories')
 export class CategoryController {
@@ -11,15 +11,16 @@ export class CategoryController {
         return this.service.findAll();
     }
 
+    @Get('slug/:slug')
+    getBySlug(@Param('slug') slug: string) {
+        return this.service.findBySlug(slug);
+    }
+
     @Get(':id')
     get(@Param('id') id: string) {
         return this.service.findOne(id);
     }
 
-    @Get('slug/:slug')
-    getBySlug(@Param('slug') slug: string) {
-        return this.service.findBySlug(slug);
-    }
 
     @Post()
     create(@Body() dto: CreateCategoryDto) {

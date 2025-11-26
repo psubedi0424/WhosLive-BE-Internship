@@ -22,7 +22,12 @@
     "typeorm:run": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/data-source.ts",
     "typeorm:migrate": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/data-source.ts",
     "typeorm:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -n",
-    "typeorm:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/data-source.ts"
+    "typeorm:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/data-source.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npm run typeorm -- migration:generate -d data-source.ts",
+    "migration:run": "npm run typeorm -- migration:run -d data-source.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d data-source.ts",
+    "seed": "ts-node src/seed.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -31,8 +36,7 @@
     "@nestjs/typeorm": "^11.0.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
-    "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.27"
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -56,6 +60,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
+    "typeorm": "^0.3.27",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
   },
