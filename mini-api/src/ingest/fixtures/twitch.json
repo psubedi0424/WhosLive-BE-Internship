@@ -1,0 +1,26 @@
+[
+    {
+        "id": "twitch-101",
+        "title": "Pro Gamer Grinding Ranked",
+        "viewer_count": 1200,
+        "user_name": "ProGamer"
+    },
+    {
+        "id": "twitch-102",
+        "title": "Late Night Coding Stream",
+        "viewer_count": 540,
+        "user_name": "Debugger"
+    },
+    {
+        "id": "twitch-103",
+        "title": "Just Chatting: Chill Talk",
+        "viewer_count": 3100,
+        "user_name": "ChatMaster"
+    },
+    {
+        "id": "twitch-104",
+        "title": "Speedrun Attempt #25",
+        "viewer_count": 880,
+        "user_name": "SpeedKing"
+    }
+]
