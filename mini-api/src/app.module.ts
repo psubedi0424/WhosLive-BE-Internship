@@ -21,7 +21,13 @@ import { RealtimeModule } from './realtime/realtime.module';
         limit: 5,
       },
     ]),
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath:
+        process.env.NODE_ENV === 'production'
+          ? 'config/prod.env'
+          : 'config/dev.env',
+    }),
 
     // MongoDB
     MongooseModule.forRoot(process.env.MONGO_URL),

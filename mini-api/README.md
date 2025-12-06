@@ -1,29 +1,77 @@
-# WhosLive – Week 3 Day 2  
+## MINI-API
 ---
-### Ingestion Module + Streams Module + Redis Queue + MongoDB Upsert
-
-The ingestion pipeline for Twitch and YouTube streams using:
-- Bull Queue (Redis)
-- NestJS Modules
-- MongoDB with idempotent upserts
-- Proper background worker processing
+## Requirements:
+* Node 20+
+* Docker and Docker Compose
+* Internet connection for build
 ---
-##  What I Worked on:
+### Installation:
+```bash
+git clone https://github.com/psubedi0424/WhosLive-BE-Internship.git
+cd mini-api
+npm install
+```
+---
+### Run with Docker:
+```bash
+docker compose down
+docker compose up --build
+```
+---
+Services:
+API → http://localhost:3000
 
-### 1. **Ingestion Module**
-- `/ingest/all` (GET + POST) endpoints added.
-- IngestService fetches:
-  - Twitch Live Streams
-  - YouTube Live Streams  
-- Pushes both datasets into a Bull Queue (`ingest` queue).
-- Configured retry + exponential backoff.
+MongoDB → localhost:27017
 
-### 2. **Bull Queue Integration**
-- Redis is used as the job broker.
-- IngestProcessor runs with concurrency = 5.
-- Each job processes streams and upserts them to MongoDB.
+Redis → localhost:6379
+---
+## Endpoints
 
-### 3. **Idempotent Upsert**
-- No duplicates
-- Re-running ingestion does NOT increase document count
-- Verified using Node REPL inside the container
+
+| Method | Endpoint   | Description                       |
+| ------ | ---------- | --------------------------------- |
+| GET    | `/streams` | List streams (cached)             |
+| POST   | `/streams` | Upsert stream & invalidate caches |
+
+
+Creators
+
+| GET | /creators/:id/streams | Cached by creator |
+
+Analytics
+
+| GET | /analytics/now | Cached snapshot (with TTL) |
+
+Realtime SSE
+
+| GET | /realtime/live | Sends SSE every 5 seconds |
+---
+## Circuit Breaker
+
+Provider API calls are protected with opossum.
+
+Circuit:
+
+Opens when 50% failures
+
+Timeout: 3s
+
+Reset: 10s
+
+Fallback data always provided
+---
+## p95 benchmark
+```bash 
+npx autocannon -c 100 -d 20 http://localhost:3000/analytics/now
+```
+## SSE Test:
+```bash
+http://localhost:3000/realtime/live
+```
+-Should receive update every 5 seconds.
+---
+## Reset Everything:
+```bash
+docker compose down -v 
+docker system prune -f
+```
