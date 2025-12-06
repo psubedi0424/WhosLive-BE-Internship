@@ -1,4 +1,38 @@
 
+# services:
+#   api:
+#     build: .
+#     container_name: whoslive-api
+#     restart: always
+#     ports:
+#       - "3000:3000"
+#     env_file: .env
+#     depends_on:
+#       - mongodb
+#       - redis
+
+#   mongodb:
+#     image: mongo:6
+#     container_name: whoslive-mongo
+#     restart: always
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#        - .:/mini-api                   # Mount current directory
+#        - /mini-api/node_modules  
+#        - mongo_data:/data/db
+
+#   redis:
+#     image: redis:7
+#     container_name: whoslive-redis
+#     restart: always
+#     ports:
+#       - "6379:6379"
+#     command: ["redis-server", "--appendonly", "yes"]
+# volumes:
+#   mongo_data:
+
+
 services:
   api:
     build: .
@@ -6,7 +40,15 @@ services:
     restart: always
     ports:
       - "3000:3000"
-    env_file: .env
+    volumes:
+      - .:/app                      # Mount source code for hot reload
+      - /app/node_modules           # Preserve node_modules in container
+      - /app/dist                   # Preserve dist folder
+    environment:
+      - NODE_ENV=development        # Change to 'production' for prod
+    env_file:
+      - ./config/dev.env            # Change to ./config/prod.env for production
+    command: npm run start:dev      # Change to 'npm run start:prod' for production
     depends_on:
       - mongodb
       - redis
@@ -18,9 +60,9 @@ services:
     ports:
       - "27017:27017"
     volumes:
-       - .:/mini-api                   # Mount current directory
-       - /mini-api/node_modules  
-       - mongo_data:/data/db
+      - mongo_data:/data/db         # Only mount MongoDB data, not app code
+    environment:
+      - MONGO_INITDB_DATABASE=whoslive
 
   redis:
     image: redis:7
@@ -28,6 +70,10 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    volumes:
+      - redis_data:/data            # Persist Redis data
     command: ["redis-server", "--appendonly", "yes"]
+
 volumes:
   mongo_data:
+  redis_data:

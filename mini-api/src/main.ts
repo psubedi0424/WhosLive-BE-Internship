@@ -1,7 +1,7 @@
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ThrottlerGuard } from '@nestjs/throttler';
+// import { ThrottlerGuard } from '@nestjs/throttler';
 // import { ThrottlerStorageService } from '@nestjs/throttler/dist/throttler-storage.interface';
 // import { ThrottlerModuleOptions } from '@nestjs/throttler/dist/throttler-options.interface';
 async function bootstrap() {
