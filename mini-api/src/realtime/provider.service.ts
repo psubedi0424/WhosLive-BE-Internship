@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import * as opossum from 'opossum';
+// import * as opossum from 'opossum';
 import axios from 'axios';
+import Circuitbreaker from 'opossum';
 
 @Injectable()
 export class ProviderService {
@@ -13,10 +14,21 @@ export class ProviderService {
       return res.data;
     };
 
-    this.breaker = new opossum(fetchFn, {
+    this.breaker = new Circuitbreaker(fetchFn, {
       timeout: 3000,
       errorThresholdPercentage: 50,
-      resetTimeout: 15000,
+      resetTimeout: 5000,
+    });
+    this.breaker.on('open', () => {
+      console.log(' Circuit OPEN');
+    });
+
+    this.breaker.on('halfOpen', () => {
+      console.log(' Circuit HALF-OPEN');
+    });
+
+    this.breaker.on('close', () => {
+      console.log(' Circuit CLOSED');
     });
   }
 

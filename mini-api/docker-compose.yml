@@ -18,7 +18,9 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+       - .:/mini-api                   # Mount current directory
+       - /mini-api/node_modules  
+       - mongo_data:/data/db
 
   redis:
     image: redis:7

@@ -5,10 +5,11 @@ import { RealtimeService } from './realtime.service';
 import { StreamsModule } from 'src/streams/streams.module';
 import { AnalyticsModule } from 'src/analytics/analytics.module';
 import { CacheModule } from '@nestjs/cache-manager';
+import { ProviderService } from './provider.service';
 
 @Module({
   imports: [StreamsModule, AnalyticsModule, CacheModule.register()],
   controllers: [RealtimeController],
-  providers: [RealtimeService],
+  providers: [RealtimeService, ProviderService],
 })
 export class RealtimeModule {}

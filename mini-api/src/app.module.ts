@@ -15,17 +15,18 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { RealtimeModule } from './realtime/realtime.module';
 @Module({
   imports: [
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 5,
+      },
+    ]),
     ConfigModule.forRoot({ isGlobal: true }),
 
     // MongoDB
     MongooseModule.forRoot(process.env.MONGO_URL),
     //Rate Limiter
-    ThrottlerModule.forRoot([
-      {
-        ttl: 6000,
-        limit: 5, //global rate limit
-      },
-    ]),
+
     // Redis
     CacheModule.register({
       store: redisStore as any,
