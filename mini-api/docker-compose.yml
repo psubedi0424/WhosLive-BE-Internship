@@ -48,11 +48,24 @@ services:
       - NODE_ENV=development        # Change to 'production' for prod
     env_file:
       - ./config/dev.env            # Change to ./config/prod.env for production
-    command: npm run start:dev      # Change to 'npm run start:prod' for production
+    # command: npm run start:dev      # Change to 'npm run start:prod' for production
+    command: ["node", "dist/main.js"]
     depends_on:
       - mongodb
       - redis
-
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3000/analytics/health"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+    #   start_period: 15s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/ingest/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+#["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/ingest/health"]
   mongodb:
     image: mongo:6
     container_name: whoslive-mongo

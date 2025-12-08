@@ -14,6 +14,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 // import { Throttle } from '@nestjs/throttler';
 import { RealtimeModule } from './realtime/realtime.module';
 import { ConfigService } from '@nestjs/config';
+import { ShutdownModule } from './shutdown/shutdown.module';
+import { RedisModule } from './redis.module';
 @Module({
   imports: [
     ThrottlerModule.forRoot([
@@ -69,6 +71,8 @@ import { ConfigService } from '@nestjs/config';
     CreatorsModule,
     AnalyticsModule,
     RealtimeModule,
+    ShutdownModule,
+    RedisModule,
   ],
 })
 export class AppModule {}

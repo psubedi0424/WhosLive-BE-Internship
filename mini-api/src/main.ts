@@ -36,8 +36,8 @@ async function bootstrap() {
 
   // app.useGlobalGuards(guard);
   //slowloris attack prevention
-  const server = app.getHttpAdapter().getInstance();
-  server.setTimeout(5000);
+  // const server = app.getHttpServer().getHttpAdapter().getInstance();
+  // server.setTimeout(5000);
 
   const config = new DocumentBuilder()
     .setTitle('WhosLive API')
@@ -49,6 +49,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/docs', app, document);
 
+  app.enableShutdownHooks();
+
   await app.listen(process.env.PORT || 3000);
+  // not required as enableshutdownhooks handles it
+  process.on('SIGTERM', async () => {
+    console.log('SIGTERM received. Closing server...');
+    await app.close();
+    process.exit(0);
+  });
 }
 bootstrap();

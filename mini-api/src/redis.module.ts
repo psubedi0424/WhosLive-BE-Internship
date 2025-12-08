@@ -1,0 +1,24 @@
+// redis.module.ts
+import { Module, Global } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import Redis from 'ioredis';
+
+@Global() // Make it available globally
+@Module({
+  imports: [ConfigModule],
+  providers: [
+    {
+      provide: 'REDIS_CLIENT',
+      useFactory: (configService: ConfigService) => {
+        return new Redis({
+          host: configService.get('REDIS_HOST', 'whoslive - redis'),
+          port: configService.get('REDIS_PORT', 6379),
+          // Add other Redis options if needed
+        });
+      },
+      inject: [ConfigService],
+    },
+  ],
+  exports: ['REDIS_CLIENT'],
+})
+export class RedisModule {}
