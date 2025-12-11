@@ -7,7 +7,7 @@ import Redis from 'ioredis';
 export class StreamsController {
   constructor(
     private readonly streamsService: StreamsService,
-    @Inject(Redis) private redis: Redis,
+    @Inject('REDIS_CLIENT') private redis: Redis,
   ) {}
   // @Get()
   // async getStreams(@Query('q') q?: string) {

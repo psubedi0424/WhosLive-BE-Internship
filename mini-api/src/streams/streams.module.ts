@@ -18,17 +18,20 @@ import Redis from 'ioredis';
       provide: 'REDIS_CLIENT',
       useFactory: () => {
         return new Redis({
-          host: process.env.REDIS_HOST || 'localhost',
+          host: process.env.REDIS_HOST || 'redis',
           port: parseInt(process.env.REDIS_PORT || '6379'),
           // Optional: Add other config
           retryStrategy: (times) => {
             const delay = Math.min(times * 50, 2000);
             return delay;
           },
+          maxRetriesPerRequest: 3,
+          enableReadyCheck: false,
+          lazyConnect: true,
         });
       },
     },
   ],
-  exports: [StreamsService, 'REDIS_ClIENT'],
+  exports: [StreamsService, 'REDIS_CLIENT'],
 })
 export class StreamsModule {}

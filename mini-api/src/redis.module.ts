@@ -12,7 +12,6 @@ import Redis from 'ioredis';
         return new Redis({
           host: configService.get('REDIS_HOST', 'whoslive - redis'),
           port: configService.get('REDIS_PORT', 6379),
-          // Add other Redis options if needed
         });
       },
       inject: [ConfigService],
