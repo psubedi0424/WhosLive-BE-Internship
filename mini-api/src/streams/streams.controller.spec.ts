@@ -1,10 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { StreamsController } from './streams.controller';
 import { StreamsService } from './streams.service';
+import Redis from 'ioredis';
 
 describe('StreamsController', () => {
   let controller: StreamsController;
   let mockStreamsService: any;
+  let mockRedis: any;
 
   beforeEach(async () => {
     mockStreamsService = {
@@ -12,16 +14,18 @@ describe('StreamsController', () => {
       upsertStream: jest.fn().mockResolvedValue({ ok: true }),
     };
 
-    const mockCache = {
+    mockRedis = {
       get: jest.fn(),
-      set: jest.fn(),
+      setex: jest.fn(),
+      del: jest.fn(),
+      keys: jest.fn(),
     };
 
     const module = await Test.createTestingModule({
       controllers: [StreamsController],
       providers: [
         { provide: StreamsService, useValue: mockStreamsService },
-        { provide: 'CACHE_MANAGER', useValue: mockCache },
+        { provide: Redis, useValue: mockRedis },
       ],
     }).compile();
 

@@ -4,6 +4,7 @@ import { StreamsController } from './streams.controller';
 import { StreamsService } from './streams.service';
 import { Stream, StreamSchema } from './streams.schema';
 import { AnalyticsModule } from 'src/analytics/analytics.module';
+import Redis from 'ioredis';
 
 @Module({
   imports: [
@@ -11,7 +12,23 @@ import { AnalyticsModule } from 'src/analytics/analytics.module';
     forwardRef(() => AnalyticsModule),
   ],
   controllers: [StreamsController],
-  providers: [StreamsService],
-  exports: [StreamsService],
+  providers: [
+    StreamsService,
+    {
+      provide: 'REDIS_CLIENT',
+      useFactory: () => {
+        return new Redis({
+          host: process.env.REDIS_HOST || 'localhost',
+          port: parseInt(process.env.REDIS_PORT || '6379'),
+          // Optional: Add other config
+          retryStrategy: (times) => {
+            const delay = Math.min(times * 50, 2000);
+            return delay;
+          },
+        });
+      },
+    },
+  ],
+  exports: [StreamsService, 'REDIS_ClIENT'],
 })
 export class StreamsModule {}

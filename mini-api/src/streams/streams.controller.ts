@@ -1,13 +1,13 @@
 import { Controller, Get, Query, Post, Body, Inject } from '@nestjs/common';
 import { StreamsService } from './streams.service';
-// import { Redis } from 'ioredis';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Cache } from '@nestjs/cache-manager';
+// import { CACHE_MANAGER } from '@nestjs/cache-manager';
+// import { Cache } from '@nestjs/cache-manager';
+import Redis from 'ioredis';
 @Controller('streams')
 export class StreamsController {
   constructor(
     private readonly streamsService: StreamsService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    @Inject(Redis) private redis: Redis,
   ) {}
   // @Get()
   // async getStreams(@Query('q') q?: string) {
