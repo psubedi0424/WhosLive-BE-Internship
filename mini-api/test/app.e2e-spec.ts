@@ -1,24 +1,33 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import * as request from 'supertest';
-import { AppModule } from './../src/app.module';
+import request from 'supertest';
+import { AppModule } from '../src/app.module';
 
-describe('AppController (e2e)', () => {
+describe('App E2E', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
+  beforeAll(async () => {
+    const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = moduleRef.createNestApplication();
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  afterAll(async () => {
+    await app.close();
+  });
+
+  it('/streams (GET)', () => {
+    return request(app.getHttpServer()).get('/streams').expect(200);
+  });
+
+  it('/analytics/health (GET)', () => {
+    return request(app.getHttpServer()).get('/analytics/health').expect(200);
+  });
+
+  it('/realtime/health (GET)', () => {
+    return request(app.getHttpServer()).get('/realtime/health').expect(200);
   });
 });

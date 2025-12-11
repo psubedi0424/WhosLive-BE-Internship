@@ -26,21 +26,8 @@ export class StreamsController {
   // }
   @Get()
   async getStreams(@Query('q') q?: string) {
-    const cacheKey = q ? `streams:q=${q}` : 'streams:all';
-
-    // Check cache
-    const cached = await this.cacheManager.get(cacheKey);
-    if (cached) {
-      return { cached: true, data: cached };
-    }
-
-    // Get data from service
     const data = await this.streamsService.findAll(q);
-
-    // Cache for 40 seconds
-    await this.cacheManager.set(cacheKey, data, 40000);
-
-    return { cached: false, data };
+    return { data };
   }
   @Post()
   async createStream(@Body() body: any) {
